@@ -288,7 +288,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid #A78BFA;outline-offset
 <p style="margin: 0; font-size: 17px; color: #B9B9C9">Javit ćemo vam se uskoro s prijedlogom i ponudom.</p>
 <button type="button" id="pd-reset" style="background: none; border: 1px solid #34344C; color: #FFFFFF; padding: 12px 20px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; min-height: 44px">Pošalji novi upit</button>
 </div>
-<form id="pd-forma" aria-label="Upit za ponudu" style="display: flex; flex-direction: column; gap: 18px">
+<form id="pd-forma" action="https://formspree.io/f/mljgynzd" method="POST" aria-label="Upit za ponudu" style="display: flex; flex-direction: column; gap: 18px">
 <div style="display: flex; flex-wrap: wrap; gap: 18px">
 <div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px">
 <label for="pd-ime" style="font-size: 14px; font-weight: 700; color: #DADAE6">Ime i prezime</label>
@@ -332,15 +332,20 @@ input:focus,select:focus,textarea:focus{outline:2px solid #A78BFA;outline-offset
 
 </div>
 <script>
-// Forma: dok se ne spoji servis za slanje (npr. Formspree), otvara mail s upitom.
+// Forma: šalje upit preko Formspreea, a upit stiže na PaRaDigital@gmail.com.
 (function(){
-  var f=document.getElementById('pd-forma'),h=document.getElementById('pd-hvala');
+  var f=document.getElementById('pd-forma'),h=document.getElementById('pd-hvala'),b=f.querySelector('button[type="submit"]');
   f.addEventListener('submit',function(e){
     e.preventDefault();
     var d=new FormData(f);
-    var tekst='Ime: '+d.get('ime')+'\nE-mail: '+d.get('email')+'\nTreba: '+d.get('vrsta')+'\n\n'+d.get('poruka');
-    window.location.href='mailto:PaRaDigital@gmail.com?subject='+encodeURIComponent('Upit sa stranice: '+d.get('vrsta'))+'&body='+encodeURIComponent(tekst);
-    f.hidden=true;h.hidden=false;
+    d.append('_subject','Upit sa stranice: '+d.get('vrsta'));
+    b.disabled=true;b.textContent='Šaljem...';
+    fetch(f.action,{method:'POST',body:d,headers:{'Accept':'application/json'}}).then(function(r){
+      if(!r.ok)throw new Error();
+      f.hidden=true;h.hidden=false;
+    }).catch(function(){
+      alert('Upit nije poslan. Pokušajte ponovno ili nam pišite na PaRaDigital@gmail.com.');
+    }).then(function(){b.disabled=false;b.textContent='Pošalji upit';});
   });
   document.getElementById('pd-reset').addEventListener('click',function(){f.reset();h.hidden=true;f.hidden=false;});
 })();
