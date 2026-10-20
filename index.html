@@ -275,7 +275,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid #A78BFA;outline-offset
 <h2 id="kontakt-naslov" style="margin: 0; font-size: clamp(32px, 4vw, 48px); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; color: #FFFFFF">Imate ideju? Javite se.</h2>
 <p style="margin: 0; font-size: 18px; color: #B9B9C9">Napišite nam par riječi o svom biznisu i javit ćemo vam se s prijedlogom i ponudom. Besplatno i bez obveze.</p>
 <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 8px; font-size: 16px; font-weight: 600">
-<a href="mailto:PaRaDigital@gmail.com" style="display: flex; align-items: center; gap: 14px; color: #FFFFFF; text-decoration: none"><span style="width: 44px; height: 44px; border-radius: 12px; background: #1E1A33; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span>PaRaDigital@gmail.com</a>
+<a href="mailto:info.paradigital@gmail.com" style="display: flex; align-items: center; gap: 14px; color: #FFFFFF; text-decoration: none"><span style="width: 44px; height: 44px; border-radius: 12px; background: #1E1A33; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span>info.paradigital@gmail.com</a>
 <a href="tel:+385917979793" style="display: flex; align-items: center; gap: 14px; color: #FFFFFF; text-decoration: none"><span style="width: 44px; height: 44px; border-radius: 12px; background: #1E1A33; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M11 18h2"></path></svg></span>091 797 9793</a>
 <a href="https://instagram.com/info.paradigital" style="display: flex; align-items: center; gap: 14px; color: #FFFFFF; text-decoration: none"><span style="width: 44px; height: 44px; border-radius: 12px; background: #1E1A33; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="#A78BFA"></circle></svg></span>@info.paradigital</a>
 </div>
@@ -332,7 +332,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid #A78BFA;outline-offset
 
 </div>
 <script>
-// Forma: šalje upit preko Formspreea, a upit stiže na PaRaDigital@gmail.com.
+// Forma: šalje upit preko Formspreea, a upit stiže na info.paradigital@gmail.com.
 (function(){
   var f=document.getElementById('pd-forma'),h=document.getElementById('pd-hvala'),b=f.querySelector('button[type="submit"]');
   f.addEventListener('submit',function(e){
@@ -344,7 +344,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid #A78BFA;outline-offset
       if(!r.ok)throw new Error();
       f.hidden=true;h.hidden=false;
     }).catch(function(){
-      alert('Upit nije poslan. Pokušajte ponovno ili nam pišite na PaRaDigital@gmail.com.');
+      alert('Upit nije poslan. Pokušajte ponovno ili nam pišite na info.paradigital@gmail.com.');
     }).then(function(){b.disabled=false;b.textContent='Pošalji upit';});
   });
   document.getElementById('pd-reset').addEventListener('click',function(){f.reset();h.hidden=true;f.hidden=false;});
