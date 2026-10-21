@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pizzeria Fumo: primjer stranice za naručivanje</title>
+<meta name="description" content="Primjer stranice za online naručivanje koju je izradio PaRa Digital. Pizzeria Fumo je izmišljeni restoran.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&amp;family=Manrope:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;800&amp;display=swap" rel="stylesheet">
+<style>
+:root{--krema:#FFF7EC;--krema2:#FBEBD5;--crvena:#C8402A;--crvena2:#A93220;--tamna:#2A1A12;--siva:#6E5A4E;--zelena:#3F7D3A;--rub:#EBD9C2}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--krema);color:var(--tamna);font-family:'Manrope',sans-serif;line-height:1.6}
+a{color:inherit}
+h1,h2,h3{font-family:'Fraunces',serif;line-height:1.1;margin:0}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+button{font:inherit;cursor:pointer}
+input,select,textarea{font:inherit}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--crvena);outline-offset:2px}
+
+.demo{background:#0B0B12;color:#ECEBF5;font-size:13px;font-family:'Manrope',sans-serif}
+.demo .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 16px;padding-top:9px;padding-bottom:9px}
+.demo b{color:#A78BFA;font-family:'JetBrains Mono',monospace}
+.demo a{color:#C4B5FD;font-weight:700;text-decoration:none}
+
+header{position:sticky;top:0;z-index:20;background:rgba(255,247,236,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--rub)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px}
+.logo{font-family:'Fraunces',serif;font-size:26px;font-weight:800;text-decoration:none;letter-spacing:-.5px}
+.logo span{color:var(--crvena)}
+nav{display:flex;align-items:center;gap:22px;font-weight:700;font-size:15px}
+nav a{text-decoration:none}
+.nav-link{display:none}
+@media(min-width:760px){.nav-link{display:inline}}
+.gumb{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--crvena);color:#fff;border:none;border-radius:999px;padding:12px 22px;font-weight:800;text-decoration:none;min-height:46px}
+.gumb:hover{background:var(--crvena2)}
+.gumb.svijetli{background:transparent;color:var(--tamna);border:2px solid var(--tamna)}
+.gumb.svijetli:hover{background:var(--tamna);color:var(--krema)}
+.kosarica-broj{background:#fff;color:var(--crvena);border-radius:999px;min-width:22px;height:22px;padding:0 6px;font-size:13px;display:inline-flex;align-items:center;justify-content:center}
+
+.hero{padding:64px 0 72px}
+.hero .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:48px}
+.hero-tekst{flex:1 1 440px;display:flex;flex-direction:column;gap:22px}
+.oznaka{display:inline-flex;align-self:flex-start;gap:8px;align-items:center;background:var(--krema2);border:1px solid var(--rub);border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px;color:var(--siva)}
+.oznaka i{width:8px;height:8px;border-radius:50%;background:var(--zelena);display:inline-block}
+.hero h1{font-size:clamp(44px,7vw,80px);letter-spacing:-1.5px}
+.hero h1 em{color:var(--crvena);font-style:italic}
+.hero p{margin:0;font-size:19px;color:var(--siva);max-width:520px}
+.hero-gumbi{display:flex;flex-wrap:wrap;gap:12px}
+.hero-info{display:flex;flex-wrap:wrap;gap:8px 26px;font-weight:700;font-size:15px}
+.hero-slika{flex:1 1 380px;display:flex;justify-content:center}
+.hero-slika svg{width:100%;max-width:440px;height:auto;filter:drop-shadow(0 30px 40px rgba(42,26,18,.25))}
+
+.jelovnik{padding:72px 0;background:#fff;border-top:1px solid var(--rub);border-bottom:1px solid var(--rub)}
+.naslov-odj{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.naslov-odj h2{font-size:clamp(34px,4.5vw,50px);letter-spacing:-.5px}
+.naslov-odj p{margin:0;color:var(--siva);font-size:17px}
+.kategorije{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:24px}
+.kategorije button{flex:none;background:var(--krema);border:1px solid var(--rub);border-radius:999px;padding:10px 18px;font-weight:700;color:var(--tamna);min-height:44px}
+.kategorije button[aria-pressed="true"]{background:var(--tamna);color:var(--krema);border-color:var(--tamna)}
+.jela{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.jelo{display:flex;gap:16px;align-items:center;background:var(--krema);border:1px solid var(--rub);border-radius:20px;padding:16px}
+.jelo svg{flex:none;width:76px;height:76px}
+.jelo-tekst{flex:1;min-width:0}
+.jelo h3{font-size:20px;margin-bottom:2px}
+.jelo p{margin:0;font-size:14px;color:var(--siva)}
+.jelo-dno{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
+.cijena{font-weight:800;font-size:17px}
+.dodaj{background:var(--crvena);color:#fff;border:none;border-radius:999px;min-width:44px;height:44px;padding:0 14px;font-weight:800;font-size:15px}
+.dodaj:hover{background:var(--crvena2)}
+.dodaj.dodano{background:var(--zelena)}
+
+.kako{padding:72px 0}
+.koraci{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.korak{background:#fff;border:1px solid var(--rub);border-radius:20px;padding:26px}
+.korak b{display:inline-flex;width:40px;height:40px;border-radius:50%;background:var(--crvena);color:#fff;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:18px;margin-bottom:12px}
+.korak h3{font-size:21px;margin-bottom:6px}
+.korak p{margin:0;color:var(--siva);font-size:15px}
+
+.info{padding:0 0 80px}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.kartica{background:var(--tamna);color:var(--krema);border-radius:24px;padding:30px}
+.kartica h3{font-size:24px;margin-bottom:14px}
+.kartica dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:15px}
+.kartica dt{color:#CDB9A6}
+.kartica dd{margin:0;font-weight:700;text-align:right}
+.karta{position:relative;min-height:220px;border-radius:24px;overflow:hidden;background:repeating-linear-gradient(0deg,transparent 0 38px,#EAD8C0 38px 40px),repeating-linear-gradient(90deg,transparent 0 38px,#EAD8C0 38px 40px),var(--krema2);border:1px solid var(--rub)}
+.karta span{position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);font-size:40px}
+.karta p{position:absolute;left:16px;bottom:14px;right:16px;margin:0;background:#fff;border-radius:14px;padding:12px 14px;font-weight:700;font-size:14px;box-shadow:0 10px 30px rgba(42,26,18,.12)}
+
+footer{background:var(--tamna);color:#CDB9A6;font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;padding-top:26px;padding-bottom:90px}
+footer a{color:#fff;font-weight:700}
+@media(min-width:760px){footer .wrap{padding-bottom:26px}}
+
+.traka{position:fixed;left:12px;right:12px;bottom:12px;z-index:30;display:flex}
+.traka .gumb{flex:1;justify-content:space-between;box-shadow:0 14px 30px rgba(42,26,18,.3)}
+@media(min-width:760px){.traka{display:none}}
+
+.pozadina{position:fixed;inset:0;z-index:40;background:rgba(42,26,18,.5)}
+.panel{position:fixed;top:0;right:0;bottom:0;z-index:50;width:min(440px,100%);background:var(--krema);display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(42,26,18,.3)}
+.panel-glava{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--rub)}
+.panel-glava h2{font-size:26px}
+.zatvori{background:none;border:none;font-size:30px;line-height:1;width:44px;height:44px;color:var(--tamna)}
+.panel-tijelo{flex:1;overflow-y:auto;padding:18px 20px;display:flex;flex-direction:column;gap:18px}
+.prazno{color:var(--siva);text-align:center;padding:30px 0}
+.stavka{display:flex;align-items:center;gap:12px;justify-content:space-between}
+.stavka-ime{font-weight:700}
+.stavka-ime small{display:block;color:var(--siva);font-weight:500}
+.kolicina{display:flex;align-items:center;gap:6px}
+.kolicina button{width:36px;height:36px;border-radius:50%;border:1px solid var(--rub);background:#fff;font-weight:800}
+.kolicina span{min-width:20px;text-align:center;font-weight:800}
+.izbor{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.izbor label{display:flex;align-items:center;justify-content:center;gap:8px;border:2px solid var(--rub);border-radius:14px;padding:12px;font-weight:700;background:#fff;cursor:pointer}
+.izbor input{accent-color:var(--crvena)}
+.izbor label:has(input:checked){border-color:var(--crvena)}
+.polje{display:flex;flex-direction:column;gap:6px}
+.polje label{font-weight:700;font-size:14px}
+.polje input,.polje select,.polje textarea{border:1px solid var(--rub);background:#fff;border-radius:12px;padding:12px 14px;font-size:16px;color:var(--tamna)}
+.zbroj{border-top:1px solid var(--rub);padding-top:14px;display:flex;flex-direction:column;gap:4px;font-size:15px}
+.zbroj div{display:flex;justify-content:space-between}
+.zbroj .ukupno{font-weight:800;font-size:19px}
+.panel-dno{padding:16px 20px;border-top:1px solid var(--rub)}
+.panel-dno .gumb{width:100%}
+.potvrda{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;padding:30px 0}
+.potvrda .kvaka{width:72px;height:72px;border-radius:50%;background:var(--zelena);color:#fff;font-size:36px;display:flex;align-items:center;justify-content:center}
+.potvrda h3{font-size:28px}
+.potvrda p{margin:0;color:var(--siva)}
+.napomena{font-size:13px;background:var(--krema2);border-radius:12px;padding:10px 12px;color:var(--siva)}
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+
+<div class="demo">
+<div class="wrap">
+<span><b>&lt;PaRa/&gt;</b> Ovo je <strong>primjer stranice</strong> za izmišljeni restoran. Narudžbe se ne šalju.</span>
+<a href="../../#primjeri">← Natrag na PaRa Digital</a>
+</div>
+</div>
+
+<header>
+<div class="wrap">
+<a href="#" class="logo">Fumo<span>.</span></a>
+<nav aria-label="Glavna navigacija">
+<a href="#jelovnik" class="nav-link">Jelovnik</a>
+<a href="#kako" class="nav-link">Kako naručiti</a>
+<a href="#info" class="nav-link">Kontakt</a>
+<button type="button" class="gumb otvori-kosaricu" aria-label="Otvori košaricu">Košarica <span class="kosarica-broj">0</span></button>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="wrap">
+<div class="hero-tekst">
+<span class="oznaka"><i></i>Otvoreno danas do 23:00</span>
+<h1>Pizza iz krušne peći, <em>do vaših vrata.</em></h1>
+<p>Tijesto koje odmara 48 sati, rajčica s juga Italije i peć na drva. Naručite online u par klikova i pizza stiže za 35 do 45 minuta.</p>
+<div class="hero-gumbi">
+<a href="#jelovnik" class="gumb">Naruči online</a>
+<a href="#info" class="gumb svijetli">Radno vrijeme</a>
+</div>
+<div class="hero-info"><span>🛵 Dostava 2 €</span><span>⏱ 35 do 45 min</span><span>⭐ 4,9 na Googleu</span></div>
+</div>
+<div class="hero-slika" aria-hidden="true">
+<svg viewBox="0 0 400 400">
+<circle cx="200" cy="200" r="190" fill="#E9B872"/>
+<circle cx="200" cy="200" r="168" fill="#D9542F"/>
+<circle cx="200" cy="200" r="168" fill="url(#sir)" opacity=".9"/>
+<defs><radialGradient id="sir" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#FFE7A8"/><stop offset=".55" stop-color="#F7D27A" stop-opacity=".85"/><stop offset="1" stop-color="#F7D27A" stop-opacity="0"/></radialGradient></defs>
+<g fill="#B8321E"><circle cx="140" cy="140" r="24"/><circle cx="250" cy="120" r="22"/><circle cx="280" cy="230" r="24"/><circle cx="170" cy="270" r="23"/><circle cx="210" cy="195" r="20"/><circle cx="110" cy="220" r="19"/></g>
+<g fill="#3F7D3A"><ellipse cx="190" cy="140" rx="16" ry="9" transform="rotate(-30 190 140)"/><ellipse cx="240" cy="270" rx="16" ry="9" transform="rotate(25 240 270)"/><ellipse cx="300" cy="170" rx="15" ry="8" transform="rotate(60 300 170)"/><ellipse cx="130" cy="290" rx="14" ry="8" transform="rotate(-50 130 290)"/></g>
+<g stroke="#C98B45" stroke-width="3" opacity=".5"><line x1="200" y1="32" x2="200" y2="368"/><line x1="32" y1="200" x2="368" y2="200"/><line x1="81" y1="81" x2="319" y2="319"/><line x1="319" y1="81" x2="81" y2="319"/></g>
+</svg>
+</div>
+</div>
+</section>
+
+<section class="jelovnik" id="jelovnik" aria-labelledby="jelovnik-naslov">
+<div class="wrap">
+<div class="naslov-odj">
+<h2 id="jelovnik-naslov">Jelovnik</h2>
+<p>Dodajte jela u košaricu i naručite za dostavu ili preuzimanje.</p>
+</div>
+<div class="kategorije" role="group" aria-label="Kategorije jelovnika"></div>
+<div class="jela"></div>
+</div>
+</section>
+
+<section class="kako" id="kako" aria-labelledby="kako-naslov">
+<div class="wrap">
+<div class="naslov-odj"><h2 id="kako-naslov">Kako naručiti</h2></div>
+<div class="koraci">
+<div class="korak"><b>1</b><h3>Odaberite jela</h3><p>Dodajte pizze, salate i pića u košaricu.</p></div>
+<div class="korak"><b>2</b><h3>Dostava ili preuzimanje</h3><p>Upišite adresu ili odaberite kad dolazite po narudžbu.</p></div>
+<div class="korak"><b>3</b><h3>Gotovo</h3><p>Narudžba odmah stiže u kuhinju, a vi plaćate gotovinom ili karticom kod preuzimanja.</p></div>
+</div>
+</div>
+</section>
+
+<section class="info" id="info" aria-labelledby="info-naslov">
+<div class="wrap">
+<div class="naslov-odj"><h2 id="info-naslov">Gdje smo i kad radimo</h2></div>
+<div class="info-grid">
+<div class="kartica">
+<h3>Radno vrijeme</h3>
+<dl>
+<dt>Ponedjeljak do četvrtak</dt><dd>11:00 do 22:00</dd>
+<dt>Petak i subota</dt><dd>11:00 do 23:00</dd>
+<dt>Nedjelja</dt><dd>12:00 do 21:00</dd>
+</dl>
+</div>
+<div class="kartica">
+<h3>Kontakt</h3>
+<dl>
+<dt>Adresa</dt><dd>Ulica primjera 12, Zagreb</dd>
+<dt>Telefon</dt><dd>01 234 5678</dd>
+<dt>Dostava</dt><dd>Trešnjevka, Knežija, Stara Peščenica</dd>
+</dl>
+</div>
+<div class="karta" role="img" aria-label="Karta s lokacijom restorana">
+<span>📍</span>
+<p>Ovdje dolazi Google karta s točnom lokacijom restorana.</p>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="wrap">
+<span>© 2026 Pizzeria Fumo (izmišljeni restoran)</span>
+<span>Izradio <a href="../../">PaRa Digital</a></span>
+</div>
+</footer>
+
+<div class="traka"><button type="button" class="gumb otvori-kosaricu"><span>Košarica <span class="kosarica-broj">0</span></span><span class="traka-iznos">0,00 €</span></button></div>
+
+<div class="pozadina" hidden></div>
+<aside class="panel" role="dialog" aria-modal="true" aria-labelledby="panel-naslov" hidden>
+<div class="panel-glava">
+<h2 id="panel-naslov">Vaša narudžba</h2>
+<button type="button" class="zatvori" aria-label="Zatvori košaricu">×</button>
+</div>
+<form id="narudzba" class="panel-tijelo" novalidate>
+<div class="stavke"></div>
+<div class="detalji" hidden>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="izbor">
+<label><input type="radio" name="nacin" value="dostava" checked> 🛵 Dostava</label>
+<label><input type="radio" name="nacin" value="preuzimanje"> 🏃 Preuzimanje</label>
+</div>
+<div class="polje polje-adresa"><label for="adresa">Adresa za dostavu</label><input id="adresa" autocomplete="street-address" placeholder="Ulica i kućni broj"></div>
+<div class="polje"><label for="vrijeme">Kada?</label><select id="vrijeme"></select></div>
+<div class="polje"><label for="ime">Ime</label><input id="ime" autocomplete="name" required placeholder="Ivana"></div>
+<div class="polje"><label for="mob">Mobitel</label><input id="mob" type="tel" autocomplete="tel" required placeholder="091 234 5678"></div>
+<div class="polje"><label for="napomena">Napomena (neobavezno)</label><textarea id="napomena" rows="2" placeholder="npr. bez luka, zvono ne radi"></textarea></div>
+<div class="zbroj">
+<div><span>Jela</span><span class="iznos-jela"></span></div>
+<div class="red-dostava"><span>Dostava</span><span>2,00 €</span></div>
+<div class="ukupno"><span>Ukupno</span><span class="iznos-ukupno"></span></div>
+</div>
+<p class="napomena">Ovo je primjer: narudžba se nigdje ne šalje. Na pravoj stranici stiže restoranu na mail ili tablet.</p>
+</div>
+</div>
+<div class="potvrda" hidden>
+<div class="kvaka" aria-hidden="true">✓</div>
+<h3>Narudžba je zaprimljena!</h3>
+<p class="potvrda-tekst"></p>
+<p class="napomena">Ovo je samo primjer. Narudžba nije stvarno poslana.</p>
+</div>
+</form>
+<div class="panel-dno"><button type="submit" form="narudzba" class="gumb posalji">Naruči</button></div>
+</aside>
+
+<script>
+// Jelovnik izmišljenog restorana. Na pravoj stranici ovdje su jela i cijene klijenta.
+var JELOVNIK=[
+{kat:'Pizze',ime:'Margherita',opis:'Rajčica, mozzarella, bosiljak, maslinovo ulje',cijena:9.5,boja:'#D9542F',dodaci:'#3F7D3A'},
+{kat:'Pizze',ime:'Capricciosa',opis:'Rajčica, mozzarella, šunka, gljive, artičoke',cijena:11.5,boja:'#D9542F',dodaci:'#8A5A3B'},
+{kat:'Pizze',ime:'Diavola',opis:'Rajčica, mozzarella, ljuta salama, čili',cijena:11,boja:'#C8402A',dodaci:'#7A1E12'},
+{kat:'Pizze',ime:'Quattro formaggi',opis:'Mozzarella, gorgonzola, parmezan, dimljeni sir',cijena:12,boja:'#F2D58A',dodaci:'#E3B45A'},
+{kat:'Pizze',ime:'Vegetariana',opis:'Rajčica, mozzarella, tikvice, paprika, patlidžan',cijena:10.5,boja:'#D9542F',dodaci:'#3F7D3A'},
+{kat:'Pizze',ime:'Fumo',opis:'Krem od tartufa, mozzarella, pršut, rikola',cijena:14,boja:'#F2E2C0',dodaci:'#B8321E'},
+{kat:'Salate',ime:'Caprese',opis:'Rajčica, mozzarella, bosiljak, balsamico',cijena:7.5,boja:'#F4F1E6',dodaci:'#C8402A'},
+{kat:'Salate',ime:'Sezonska salata',opis:'Miješana salata, rajčica, krastavac, sjemenke',cijena:6,boja:'#CFE3B5',dodaci:'#3F7D3A'},
+{kat:'Deserti',ime:'Tiramisu',opis:'Domaći, s mascarponeom i espressom',cijena:5,boja:'#C9A27A',dodaci:'#6B4226'},
+{kat:'Deserti',ime:'Panna cotta',opis:'S umakom od šumskog voća',cijena:4.5,boja:'#FFF5E1',dodaci:'#9E2A4A'},
+{kat:'Pića',ime:'Domaća limunada',opis:'0,5 l, s mentom',cijena:3.5,boja:'#FBE98A',dodaci:'#3F7D3A'},
+{kat:'Pića',ime:'Mineralna voda',opis:'0,75 l',cijena:3,boja:'#D7ECF5',dodaci:'#6FA8C6'}
+];
+var DOSTAVA=2,kosarica={};
+
+function eur(x){return x.toFixed(2).replace('.',',')+' €';}
+function slika(j){
+  if(j.kat==='Pića')return '<svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="38" fill="#FBEBD5"/><path d="M27 20h26l-4 42a4 4 0 0 1-4 4H35a4 4 0 0 1-4-4z" fill="#fff" stroke="#E0CDB4" stroke-width="2"/><path d="M29 32h22l-3 30a3 3 0 0 1-3 3H35a3 3 0 0 1-3-3z" fill="'+j.boja+'"/><circle cx="36" cy="44" r="2.5" fill="'+j.dodaci+'"/><circle cx="44" cy="52" r="2" fill="'+j.dodaci+'"/></svg>';
+  return '<svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="38" fill="#E9B872"/><circle cx="40" cy="40" r="31" fill="'+j.boja+'"/>'+
+    '<g fill="'+j.dodaci+'"><circle cx="30" cy="28" r="5"/><circle cx="50" cy="30" r="4.5"/><circle cx="52" cy="50" r="5"/><circle cx="32" cy="52" r="4.5"/><circle cx="41" cy="40" r="4"/></g></svg>';
+}
+
+var kategorije=[];JELOVNIK.forEach(function(j){if(kategorije.indexOf(j.kat)<0)kategorije.push(j.kat);});
+var katEl=document.querySelector('.kategorije'),jelaEl=document.querySelector('.jela'),aktivna=kategorije[0];
+function crtajKategorije(){
+  katEl.innerHTML=kategorije.map(function(k){return '<button type="button" aria-pressed="'+(k===aktivna)+'">'+k+'</button>';}).join('');
+}
+function crtajJela(){
+  jelaEl.innerHTML=JELOVNIK.map(function(j,i){
+    if(j.kat!==aktivna)return '';
+    return '<article class="jelo">'+slika(j)+'<div class="jelo-tekst"><h3>'+j.ime+'</h3><p>'+j.opis+'</p><div class="jelo-dno"><span class="cijena">'+eur(j.cijena)+'</span><button type="button" class="dodaj" data-i="'+i+'" aria-label="Dodaj '+j.ime+' u košaricu">+ Dodaj</button></div></div></article>';
+  }).join('');
+}
+katEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;aktivna=b.textContent;crtajKategorije();crtajJela();});
+jelaEl.addEventListener('click',function(e){
+  var b=e.target.closest('.dodaj');if(!b)return;
+  var i=b.dataset.i;kosarica[i]=(kosarica[i]||0)+1;osvjezi();
+  b.classList.add('dodano');b.textContent='✓ Dodano';
+  setTimeout(function(){b.classList.remove('dodano');b.textContent='+ Dodaj';},900);
+});
+crtajKategorije();crtajJela();
+
+var panel=document.querySelector('.panel'),pozadina=document.querySelector('.pozadina'),forma=document.getElementById('narudzba');
+var stavkeEl=forma.querySelector('.stavke'),detalji=forma.querySelector('.detalji'),potvrda=forma.querySelector('.potvrda'),posalji=document.querySelector('.posalji');
+
+function zbroj(){var s=0;for(var i in kosarica)s+=kosarica[i]*JELOVNIK[i].cijena;return s;}
+function brojJela(){var n=0;for(var i in kosarica)n+=kosarica[i];return n;}
+function dostava(){return forma.nacin.value==='dostava';}
+function osvjezi(){
+  var n=brojJela(),s=zbroj();
+  document.querySelectorAll('.kosarica-broj').forEach(function(el){el.textContent=n;});
+  document.querySelector('.traka-iznos').textContent=eur(s);
+  if(!n){stavkeEl.innerHTML='<p class="prazno">Košarica je prazna. Dodajte nešto s jelovnika 🍕</p>';}
+  else stavkeEl.innerHTML=Object.keys(kosarica).map(function(i){
+    var j=JELOVNIK[i];
+    return '<div class="stavka"><span class="stavka-ime">'+j.ime+'<small>'+eur(j.cijena*kosarica[i])+'</small></span><span class="kolicina"><button type="button" data-i="'+i+'" data-d="-1" aria-label="Makni jedan">−</button><span>'+kosarica[i]+'</span><button type="button" data-i="'+i+'" data-d="1" aria-label="Dodaj još jedan">+</button></span></div>';
+  }).join('');
+  stavkeEl.hidden=!potvrda.hidden;
+  detalji.hidden=!n||!potvrda.hidden;
+  posalji.hidden=!n||!potvrda.hidden;
+  forma.querySelector('.polje-adresa').hidden=!dostava();
+  forma.querySelector('.red-dostava').hidden=!dostava();
+  forma.querySelector('.iznos-jela').textContent=eur(s);
+  forma.querySelector('.iznos-ukupno').textContent=eur(s+(dostava()?DOSTAVA:0));
+}
+stavkeEl.addEventListener('click',function(e){
+  var b=e.target.closest('button[data-i]');if(!b)return;
+  var i=b.dataset.i;kosarica[i]+=+b.dataset.d;if(kosarica[i]<=0)delete kosarica[i];osvjezi();
+});
+forma.addEventListener('change',function(e){if(e.target.name==='nacin')osvjezi();});
+
+(function(){
+  var sel=document.getElementById('vrijeme'),d=new Date(),opcije=['<option>Što prije</option>'];
+  d.setMinutes(Math.ceil((d.getMinutes()+60)/15)*15,0,0);
+  for(var k=0;k<8;k++){opcije.push('<option>Danas u '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+'</option>');d.setMinutes(d.getMinutes()+30);}
+  sel.innerHTML=opcije.join('');
+})();
+
+var zadnji=null;
+function otvori(){zadnji=document.activeElement;panel.hidden=false;pozadina.hidden=false;document.body.style.overflow='hidden';panel.querySelector('.zatvori').focus();}
+function zatvori(){
+  panel.hidden=true;pozadina.hidden=true;document.body.style.overflow='';
+  if(!potvrda.hidden){potvrda.hidden=true;osvjezi();}
+  if(zadnji)zadnji.focus();
+}
+document.querySelectorAll('.otvori-kosaricu').forEach(function(b){b.addEventListener('click',otvori);});
+panel.querySelector('.zatvori').addEventListener('click',zatvori);
+pozadina.addEventListener('click',zatvori);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!panel.hidden)zatvori();});
+
+forma.addEventListener('submit',function(e){
+  e.preventDefault();
+  var ime=forma.querySelector('#ime'),mob=forma.querySelector('#mob'),adr=forma.querySelector('#adresa');
+  var prazna=[ime,mob].concat(dostava()?[adr]:[]).filter(function(el){return !el.value.trim();});
+  forma.querySelectorAll('input').forEach(function(el){el.style.borderColor='';});
+  if(prazna.length){prazna.forEach(function(el){el.style.borderColor='#C8402A';});prazna[0].focus();return;}
+  var broj=1000+Math.floor(Math.random()*9000),vrijeme=forma.querySelector('#vrijeme').value;
+  potvrda.querySelector('.potvrda-tekst').textContent='Hvala, '+ime.value.trim()+'! Narudžba #'+broj+' ('+eur(zbroj()+(dostava()?DOSTAVA:0))+') '+(dostava()?'stiže na vašu adresu':'čeka vas u restoranu')+': '+vrijeme.toLowerCase()+'.';
+  kosarica={};forma.reset();potvrda.hidden=false;osvjezi();
+});
+osvjezi();
+</script>
+</body>
+</html>
