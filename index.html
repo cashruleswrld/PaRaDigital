@@ -20,6 +20,9 @@ input,select,textarea{font:inherit}
 input:focus,select:focus,textarea:focus{outline:2px solid #A78BFA;outline-offset:1px}
 @keyframes pdblink{50%{opacity:0}}
 .pd-caret{animation:pdblink 1.1s steps(1) infinite}
+.pd-lang button{background:none;border:none;border-radius:7px;padding:8px 10px;min-height:36px;color:#A9A9BC;font:inherit;font-size:13px;font-weight:800;cursor:pointer}
+.pd-lang button:hover{color:#FFFFFF}
+.pd-lang button[aria-pressed="true"]{background:#A78BFA;color:#0B0B12}
 
 [hidden]{display:none !important}
 </style>
@@ -39,6 +42,10 @@ input:focus,select:focus,textarea:focus{outline:2px solid #A78BFA;outline-offset
 <a href="#cijene" style="color: #C9C9D6; text-decoration: none; padding: 10px 0">Cijene</a>
 <a href="#o-nama" style="color: #C9C9D6; text-decoration: none; padding: 10px 0">O nama</a>
 <a href="#kontakt" style="background: #A78BFA; color: #0B0B12; text-decoration: none; padding: 12px 20px; border-radius: 10px; font-weight: 800">Zatraži ponudu</a>
+<div class="pd-lang" role="group" aria-label="Jezik / Language" style="display: flex; gap: 2px; padding: 3px; border: 1px solid #34344C; border-radius: 10px; font-family: 'JetBrains Mono', monospace">
+<button type="button" data-lang="hr" aria-pressed="true" lang="hr">HR</button>
+<button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+</div>
 </div>
 </nav>
 </header>
@@ -302,10 +309,10 @@ input:focus,select:focus,textarea:focus{outline:2px solid #A78BFA;outline-offset
 <div style="display: flex; flex-direction: column; gap: 8px">
 <label for="pd-vrsta" style="font-size: 14px; font-weight: 700; color: #DADAE6">Što vam treba?</label>
 <select id="pd-vrsta" name="vrsta" style="background: #0B0B12; border: 1px solid #2C2C42; border-radius: 12px; padding: 14px 16px; color: #FFFFFF; font-size: 16px">
-<option>Web stranica</option>
-<option>Stranica za naručivanje ili rezervacije</option>
-<option>Održavanje postojeće stranice</option>
-<option>Nisam siguran, trebam savjet</option>
+<option value="Web stranica">Web stranica</option>
+<option value="Stranica za naručivanje ili rezervacije">Stranica za naručivanje ili rezervacije</option>
+<option value="Održavanje postojeće stranice">Održavanje postojeće stranice</option>
+<option value="Nisam siguran, trebam savjet">Nisam siguran, trebam savjet</option>
 </select>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
@@ -332,6 +339,158 @@ input:focus,select:focus,textarea:focus{outline:2px solid #A78BFA;outline-offset
 
 </div>
 <script>
+// Jezik: stranica je napisana na hrvatskom, a ovdje je engleski prijevod svakog teksta.
+var EN={
+'PaRa Digital: web stranice i online narudžbe':'PaRa Digital: websites and online ordering',
+'Glavna navigacija':'Main navigation',
+'PaRa Digital, početna':'PaRa Digital, home',
+'Usluge':'Services',
+'Kako radimo':'How we work',
+'Cijene':'Pricing',
+'O nama':'About us',
+'Kontakt':'Contact',
+'Zatraži ponudu':'Get a quote',
+'// web studio za male biznise':'// web studio for small businesses',
+'Web stranice koje':'Websites that',
+'donose klijente.':'bring you customers.',
+'Izrađujemo moderne web stranice i stranice za online naručivanje za restorane, salone, obrtnike i trgovine. Vi radite svoj posao, a mi se brinemo da vas ljudi pronađu i naruče.':'We build modern websites and online ordering pages for restaurants, salons, tradespeople and shops. You run your business, and we make sure people find you and order from you.',
+'Zatraži besplatnu ponudu':'Get a free quote',
+'Pogledaj usluge':'See our services',
+'Prilagođeno mobitelima':'Mobile-friendly',
+'Online narudžbe':'Online orders',
+'Podrška nakon lansiranja':'Support after launch',
+'vasa-stranica.js':'your-website.js',
+'stranica':'website',
+'dizajn':'design',
+'"po mjeri"':'"custom"',
+'mobitel':'mobile',
+'narudzbe':'orders',
+'"vidljivo"':'"visible"',
+'podrska':'support',
+'Nova narudžba':'New order',
+'2x Margherita, dostava u 19:30':'2x Margherita, delivery at 7:30 pm',
+'Za koga radimo':'Who we work with',
+'radimo_za:':'we_work_with:',
+'Restorane i kafiće':'Restaurants and cafés',
+'Frizerske i kozmetičke salone':'Hair and beauty salons',
+'Obrtnike':'Tradespeople',
+'Male trgovine':'Small shops',
+'Apartmane i turizam':'Holiday rentals and tourism',
+'Lokalne usluge':'Local services',
+'// usluge':'// services',
+'Sve što vaš biznis treba na internetu':'Everything your business needs online',
+'Od prve stranice do sustava za narudžbe. Izrađujemo, postavljamo i održavamo, a vi dobivate jednu osobu za sva pitanja.':'From your first website to an ordering system. We build it, set it up and maintain it, and you get one contact for every question.',
+'Web stranice':'Websites',
+'Moderna stranica koja jasno pokazuje tko ste, što nudite i kako vas kontaktirati. Izgleda odlično na mobitelu i računalu.':'A modern website that clearly shows who you are, what you offer and how to reach you. It looks great on phones and computers.',
+'Dizajn po mjeri vašeg biznisa':'Design tailored to your business',
+'Kontakt forma i Google karte':'Contact form and Google Maps',
+'Osnovna optimizacija za Google':'Basic Google optimization',
+'Stranice za naručivanje':'Ordering websites',
+'Klijenti naručuju ili rezerviraju online u par klikova, a vi narudžbu dobivate odmah. Manje poziva, više prodaje.':'Customers order or book online in a few clicks, and you get the order instantly. Fewer calls, more sales.',
+'Online jelovnik ili katalog':'Online menu or catalog',
+'Narudžbe, rezervacije i termini':'Orders, reservations and appointments',
+'Obavijest o svakoj narudžbi na mail':'Email notification for every order',
+'Održavanje i podrška':'Maintenance and support',
+'Stranica uvijek ažurna, brza i sigurna. Promijenili ste cijene ili radno vrijeme? Javite nam se i riješeno je.':'Your website stays up to date, fast and secure. Changed your prices or opening hours? Let us know and it\'s done.',
+'Izmjene teksta, slika i cijena':'Changes to text, images and prices',
+'Domena, hosting i sigurnosne kopije':'Domain, hosting and backups',
+'Pomoć kad god zatreba':'Help whenever you need it',
+'// kako radimo':'// how we work',
+'Od ideje do gotove stranice u četiri koraka':'From idea to finished website in four steps',
+'Razgovor':'Consultation',
+'Upoznamo vaš posao i dogovorimo što vam stranica treba donijeti. Besplatno i bez obveze.':'We get to know your business and agree on what your website should achieve. Free and with no obligation.',
+'Dizajn':'Design',
+'Pokažemo vam kako će stranica izgledati prije nego krenemo s izradom, i prilagodimo je vašim željama.':'We show you what the website will look like before we start building, and adjust it to your wishes.',
+'Izrada':'Build',
+'Izradimo stranicu, povežemo narudžbe, mail i Google, i sve testiramo na mobitelu i računalu.':'We build the website, connect orders, email and Google, and test everything on phones and computers.',
+'Lansiranje':'Launch',
+'Stranica ide online, pokažemo vam kako je koristiti i ostajemo tu za sve izmjene i pitanja.':'Your website goes live, we show you how to use it, and we stay on hand for any changes and questions.',
+'// cijene':'// pricing',
+'Jasne cijene, bez skrivenih troškova':'Clear prices, no hidden costs',
+'Odaberite paket koji vam odgovara. Točnu cijenu dobivate nakon besplatnog razgovora, prije nego išta platite.':'Choose the package that suits you. You get the exact price after a free consultation, before you pay anything.',
+'Za biznise kojima treba prva stranica. Gotovo za 7 dana.':'For businesses that need their first website. Ready in 7 days.',
+'od':'from',
+'249 €':'€249',
+'499 €':'€499',
+'Do 5 podstranica (npr. Početna, O nama, Usluge, Galerija, Kontakt)':'Up to 5 pages (e.g. Home, About, Services, Gallery, Contact)',
+'Postavljanje domene':'Domain setup',
+'Odaberi Start':'Choose Start',
+'preporučeno':'recommended',
+'Biznis':'Business',
+'Za restorane i salone koji primaju narudžbe.':'For restaurants and salons that take orders.',
+'Sve iz paketa Start':'Everything in the Start package',
+'Online naručivanje ili rezervacije':'Online ordering or reservations',
+'Jelovnik, katalog ili cjenik':'Menu, catalog or price list',
+'Optimizacija za Google':'Google optimization',
+'Odaberi Biznis':'Choose Business',
+'Održavanje stranice: od 20 € mjesečno (hosting, sigurnosne kopije i sitne izmjene). Sve cijene su informativne i ovise o opsegu posla.':'Website maintenance: from €20 per month (hosting, backups and small changes). All prices are indicative and depend on the scope of work.',
+'// o nama':'// about us',
+'Dva osnivača, jedan cilj: da vaš biznis raste':'Two founders, one goal: growing your business',
+'Mi smo Borna i Josip. PaRa Digital smo pokrenuli jer vidimo koliko malih biznisa gubi klijente zbog zastarjele stranice ili zato što je uopće nemaju.':'We are Borna and Josip. We started PaRa Digital because we see how many small businesses lose customers because of an outdated website, or because they don\'t have one at all.',
+'Kod nas uvijek razgovarate izravno s ljudima koji rade vašu stranicu. Bez posrednika, bez kompliciranja.':'With us, you always talk directly to the people building your website. No middlemen, no complications.',
+'suosnivač, dizajn i izrada':'co-founder, design and development',
+'Dizajnira i izrađuje stranice, a s vama je od prvog razgovora do lansiranja. Zna točno što vašem biznisu treba.':'Designs and builds websites, and works with you from the first conversation to launch. Knows exactly what your business needs.',
+'suosnivač, izrada i tehnika':'co-founder, development and tech',
+'Izrađuje stranice i brine se da sve radi brzo i pouzdano, na svakom uređaju.':'Builds websites and makes sure everything runs fast and reliably, on every device.',
+'// česta pitanja':'// FAQ',
+'Imate pitanje? Vjerojatno je ovdje.':'Have a question? It\'s probably answered here.',
+'Koliko traje izrada stranice?':'How long does it take to build a website?',
+'Stranica iz paketa Start gotova je za najviše 7 dana, a stranica s naručivanjem iz paketa Biznis za 2 do 3 tjedna. Točan rok dogovaramo na prvom razgovoru i držimo ga se.':'A Start website is ready in 7 days at most, and an ordering website from the Business package in 2 to 3 weeks. We agree on the exact deadline at the first consultation and stick to it.',
+'Što trebam pripremiti?':'What do I need to prepare?',
+'Dovoljno je da imate logo, nekoliko fotografija i osnovne informacije o poslu. Tekstove i strukturu stranice možemo složiti zajedno s vama.':'All you need is a logo, a few photos and basic information about your business. We can put together the text and structure of the website with you.',
+'Mogu li sam mijenjati sadržaj?':'Can I change the content myself?',
+'Da. Pokazat ćemo vam kako promijeniti tekst, slike i cijene. Ako to ne želite raditi sami, izmjene radimo mi u sklopu održavanja.':'Yes. We\'ll show you how to change text, images and prices. If you\'d rather not do it yourself, we make the changes as part of maintenance.',
+'Što je s domenom i hostingom?':'What about the domain and hosting?',
+'Pomažemo vam odabrati i postaviti domenu (npr. vasbiznis.hr) i hosting, tako da sve radi od prvog dana. Domena je uvijek registrirana na vas.':'We help you choose and set up a domain (e.g. yourbusiness.com) and hosting, so everything works from day one. The domain is always registered in your name.',
+'Koliko košta prvi razgovor?':'How much does the first consultation cost?',
+'Ništa. Razgovor i ponuda su besplatni i bez ikakve obveze. Plaćate tek kad se dogovorimo.':'Nothing. The consultation and quote are free and with no obligation. You only pay once we agree.',
+'// kontakt':'// contact',
+'Imate ideju? Javite se.':'Have an idea? Get in touch.',
+'Napišite nam par riječi o svom biznisu i javit ćemo vam se s prijedlogom i ponudom. Besplatno i bez obveze.':'Tell us a little about your business and we\'ll get back to you with a proposal and a quote. Free and with no obligation.',
+'091 797 9793':'+385 91 797 9793',
+'Hvala, upit je poslan!':'Thank you, your inquiry has been sent!',
+'Javit ćemo vam se uskoro s prijedlogom i ponudom.':'We\'ll get back to you soon with a proposal and a quote.',
+'Pošalji novi upit':'Send another inquiry',
+'Upit za ponudu':'Quote request',
+'Ime i prezime':'Full name',
+'Ivana Horvat':'Jane Smith',
+'E-mail':'Email',
+'ivana@primjer.hr':'jane@example.com',
+'Što vam treba?':'What do you need?',
+'Web stranica':'Website',
+'Stranica za naručivanje ili rezervacije':'Ordering or booking website',
+'Održavanje postojeće stranice':'Maintenance of an existing website',
+'Nisam siguran, trebam savjet':'Not sure yet, I need advice',
+'Poruka':'Message',
+'Ukratko opišite svoj biznis i što biste željeli na stranici.':'Briefly describe your business and what you would like on your website.',
+'Pošalji upit':'Send inquiry',
+'Šaljem...':'Sending...',
+'Upit nije poslan. Pokušajte ponovno ili nam pišite na info.paradigital@gmail.com.':'Your inquiry was not sent. Please try again or email us at info.paradigital@gmail.com.',
+'Natrag na vrh':'Back to top',
+'© 2026 PaRa Digital. Sva prava pridržana.':'© 2026 PaRa Digital. All rights reserved.'
+};
+var jezik='hr';
+function t(s){return jezik==='en'&&EN[s]||s;}
+(function(){
+  var tekstovi=[],atributi=[],naslov=document.title;
+  var w=document.createTreeWalker(document.getElementById('vrh'),NodeFilter.SHOW_TEXT),n;
+  while((n=w.nextNode())){var s=n.nodeValue.trim();if(EN[s])tekstovi.push({n:n,hr:n.nodeValue,s:s});}
+  document.querySelectorAll('[placeholder],[aria-label]').forEach(function(el){
+    ['placeholder','aria-label'].forEach(function(a){var s=el.getAttribute(a);if(s&&EN[s])atributi.push({el:el,a:a,s:s});});
+  });
+  function postavi(j){
+    jezik=j;
+    document.documentElement.lang=j;
+    document.title=t(naslov);
+    tekstovi.forEach(function(o){o.n.nodeValue=j==='en'?o.hr.replace(o.s,EN[o.s]):o.hr;});
+    atributi.forEach(function(o){o.el.setAttribute(o.a,t(o.s));});
+    document.querySelectorAll('.pd-lang button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===j);});
+    try{localStorage.setItem('pd-jezik',j);}catch(e){}
+  }
+  document.querySelectorAll('.pd-lang button').forEach(function(b){b.addEventListener('click',function(){postavi(b.dataset.lang);});});
+  try{if(localStorage.getItem('pd-jezik')==='en')postavi('en');}catch(e){}
+})();
+
 // Forma: šalje upit preko Formspreea, a upit stiže na info.paradigital@gmail.com.
 (function(){
   var f=document.getElementById('pd-forma'),h=document.getElementById('pd-hvala'),b=f.querySelector('button[type="submit"]');
@@ -339,13 +498,14 @@ input:focus,select:focus,textarea:focus{outline:2px solid #A78BFA;outline-offset
     e.preventDefault();
     var d=new FormData(f);
     d.append('_subject','Upit sa stranice: '+d.get('vrsta'));
-    b.disabled=true;b.textContent='Šaljem...';
+    d.append('jezik',jezik==='en'?'engleski':'hrvatski');
+    b.disabled=true;b.textContent=t('Šaljem...');
     fetch(f.action,{method:'POST',body:d,headers:{'Accept':'application/json'}}).then(function(r){
       if(!r.ok)throw new Error();
       f.hidden=true;h.hidden=false;
     }).catch(function(){
-      alert('Upit nije poslan. Pokušajte ponovno ili nam pišite na info.paradigital@gmail.com.');
-    }).then(function(){b.disabled=false;b.textContent='Pošalji upit';});
+      alert(t('Upit nije poslan. Pokušajte ponovno ili nam pišite na info.paradigital@gmail.com.'));
+    }).then(function(){b.disabled=false;b.textContent=t('Pošalji upit');});
   });
   document.getElementById('pd-reset').addEventListener('click',function(){f.reset();h.hidden=true;f.hidden=false;});
 })();
