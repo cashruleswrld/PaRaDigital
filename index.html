@@ -10,7 +10,26 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;800&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#0B0B12}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+.pd-header{position:sticky;top:0;z-index:50;background:rgba(11,11,18,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid #1E1E2E}
+.pd-nav{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.pd-nav-desno{display:flex;align-items:center;gap:28px}
+.pd-linkovi{display:flex;align-items:center;gap:28px;font-size:15px;font-weight:600}
+.pd-linkovi a{color:#C9C9D6;text-decoration:none;padding:10px 0}
+.pd-linkovi a:hover{color:#FFFFFF}
+.pd-linkovi-kontakt{display:none}
+.pd-cta{background:#A78BFA;color:#0B0B12 !important;text-decoration:none;padding:12px 20px;border-radius:10px;font-size:15px;font-weight:800;white-space:nowrap}
+.pd-meni{display:none;align-items:center;justify-content:center;width:44px;height:44px;background:none;border:1px solid #34344C;border-radius:10px;color:#FFFFFF;cursor:pointer}
+@media(max-width:959px){
+.pd-nav-desno{gap:10px}
+.pd-meni{display:flex}
+.pd-linkovi{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;padding:4px 24px 16px;background:#0B0B12;border-bottom:1px solid #1E1E2E;font-size:17px}
+.pd-linkovi.otvoreno{display:flex}
+.pd-linkovi a{padding:14px 0;border-bottom:1px solid #1E1E2E}
+.pd-linkovi a:last-child{border-bottom:none}
+.pd-cta{padding:10px 14px;font-size:14px}
+}
+@media(max-width:439px){.pd-cta{display:none}.pd-linkovi-kontakt{display:block}}
 a{color:#C4B5FD}a:hover{color:#E9E4FF}
 summary{cursor:pointer;list-style:none}
 summary::-webkit-details-marker{display:none}
@@ -30,23 +49,27 @@ input:focus,select:focus,textarea:focus{outline:2px solid #A78BFA;outline-offset
 <body>
 <div id="vrh" style="background: #0B0B12; color: #ECEBF5; font-family: 'Manrope', sans-serif; line-height: 1.6">
 
-<header style="border-bottom: 1px solid #1E1E2E">
-<nav aria-label="Glavna navigacija" style="max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px">
+<header class="pd-header">
+<nav aria-label="Glavna navigacija" class="pd-nav">
 <a href="#vrh" aria-label="PaRa Digital, početna" style="text-decoration: none; display: flex; flex-direction: column; font-family: 'JetBrains Mono', monospace; line-height: 1">
 <span style="font-size: 26px; font-weight: 800; letter-spacing: -1px; color: #FFFFFF"><span style="color: #A78BFA">&lt;</span>PaRa<span style="color: #A78BFA">/&gt;</span></span>
 <span style="display: flex; align-items: center; gap: 4px; padding-left: 18px; margin-top: 4px; font-size: 11px; font-weight: 500; color: #A9A9BC">digital<span style="display: inline-block; width: 5px; height: 11px; background: #A78BFA"></span></span>
 </a>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px; font-size: 15px; font-weight: 600">
-<a href="#usluge" style="color: #C9C9D6; text-decoration: none; padding: 10px 0">Usluge</a>
-<a href="#primjeri" style="color: #C9C9D6; text-decoration: none; padding: 10px 0">Primjeri</a>
-<a href="#proces" style="color: #C9C9D6; text-decoration: none; padding: 10px 0">Kako radimo</a>
-<a href="#cijene" style="color: #C9C9D6; text-decoration: none; padding: 10px 0">Cijene</a>
-<a href="#o-nama" style="color: #C9C9D6; text-decoration: none; padding: 10px 0">O nama</a>
-<a href="#kontakt" style="background: #A78BFA; color: #0B0B12; text-decoration: none; padding: 12px 20px; border-radius: 10px; font-weight: 800">Zatraži ponudu</a>
+<div class="pd-nav-desno">
+<div class="pd-linkovi" id="pd-linkovi">
+<a href="#usluge">Usluge</a>
+<a href="#primjeri">Primjeri</a>
+<a href="#proces">Kako radimo</a>
+<a href="#cijene">Cijene</a>
+<a href="#o-nama">O nama</a>
+<a href="#kontakt" class="pd-linkovi-kontakt">Kontakt</a>
+</div>
+<a href="#kontakt" class="pd-cta">Zatraži ponudu</a>
 <div class="pd-lang" role="group" aria-label="Jezik / Language" style="display: flex; gap: 2px; padding: 3px; border: 1px solid #34344C; border-radius: 10px; font-family: 'JetBrains Mono', monospace">
 <button type="button" data-lang="hr" aria-pressed="true" lang="hr">HR</button>
 <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
 </div>
+<button type="button" class="pd-meni" aria-expanded="false" aria-controls="pd-linkovi" aria-label="Izbornik"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
 </div>
 </nav>
 </header>
@@ -386,6 +409,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid #A78BFA;outline-offset
 var EN={
 'PaRa Digital: web stranice i online narudžbe':'PaRa Digital: websites and online ordering',
 'Glavna navigacija':'Main navigation',
+'Izbornik':'Menu',
 'PaRa Digital, početna':'PaRa Digital, home',
 'Usluge':'Services',
 'Kako radimo':'How we work',
@@ -542,6 +566,15 @@ function t(s){return jezik==='en'&&EN[s]||s;}
   }
   document.querySelectorAll('.pd-lang button').forEach(function(b){b.addEventListener('click',function(){postavi(b.dataset.lang);});});
   try{if(localStorage.getItem('pd-jezik')==='en')postavi('en');}catch(e){}
+})();
+
+// Izbornik na mobitelu: gumb ☰ otvara i zatvara popis linkova.
+(function(){
+  var gumb=document.querySelector('.pd-meni'),linkovi=document.getElementById('pd-linkovi');
+  function postavi(otvoreno){linkovi.classList.toggle('otvoreno',otvoreno);gumb.setAttribute('aria-expanded',otvoreno);}
+  gumb.addEventListener('click',function(){postavi(!linkovi.classList.contains('otvoreno'));});
+  linkovi.addEventListener('click',function(e){if(e.target.closest('a'))postavi(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&linkovi.classList.contains('otvoreno')){postavi(false);gumb.focus();}});
 })();
 
 // Forma: šalje upit preko Formspreea, a upit stiže na info.paradigital@gmail.com.
