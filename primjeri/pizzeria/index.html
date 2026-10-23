@@ -50,6 +50,7 @@ header .gumb{padding:10px 16px}
 .hero-tekst{flex:1 1 440px;display:flex;flex-direction:column;gap:22px}
 .oznaka{display:inline-flex;align-self:flex-start;gap:8px;align-items:center;background:var(--krema2);border:1px solid var(--rub);border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px;color:var(--siva)}
 .oznaka i{width:8px;height:8px;border-radius:50%;background:var(--zelena);display:inline-block}
+.oznaka.zatvoreno i{background:var(--crvena)}
 .hero h1{font-size:clamp(44px,7vw,80px);letter-spacing:-1.5px}
 .hero h1 em{color:var(--crvena);font-style:italic}
 .hero p{margin:0;font-size:19px;color:var(--siva);max-width:520px}
@@ -168,7 +169,7 @@ footer a{color:#fff;font-weight:700}
 <section class="hero">
 <div class="wrap">
 <div class="hero-tekst">
-<span class="oznaka"><i></i>Otvoreno danas do 23:00</span>
+<span class="oznaka"><i></i><span class="oznaka-tekst">Otvoreno danas do 23:00</span></span>
 <h1>Pizza iz krušne peći, <em>do vaših vrata.</em></h1>
 <p>Tijesto koje odmara 48 sati, rajčica s juga Italije i peć na drva. Naručite online u par klikova i pizza stiže za 35 do 45 minuta.</p>
 <div class="hero-gumbi">
@@ -302,7 +303,6 @@ var EN={
 'Kontakt':'Contact',
 'Otvori košaricu':'Open cart',
 'Košarica':'Cart',
-'Otvoreno danas do 23:00':'Open today until 11 pm',
 'Pizza iz krušne peći,':'Wood-fired pizza,',
 'do vaših vrata.':'delivered to your door.',
 'Tijesto koje odmara 48 sati, rajčica s juga Italije i peć na drva. Naručite online u par klikova i pizza stiže za 35 do 45 minuta.':'Dough rested for 48 hours, tomatoes from southern Italy and a wood-fired oven. Order online in a few clicks and your pizza arrives in 35 to 45 minutes.',
@@ -431,6 +431,20 @@ var JELOVNIK=[
 {kat:'alkoholna',hr:'Crno vino Plavac mali',en:'Plavac mali red wine',ohr:'Boca 0,75 l',oen:'0.75 l bottle',c:18},
 {kat:'alkoholna',hr:'Bijelo vino Graševina',en:'Graševina white wine',ohr:'Boca 0,75 l',oen:'0.75 l bottle',c:16}
 ];
+// Radno vrijeme po danima (0 = nedjelja): [otvara, zatvara] u satima.
+var RADNO=[[12,21],[11,22],[11,22],[11,22],[11,22],[11,23],[11,23]];
+function satEN(h){return (h%12||12)+(h<12?' am':' pm');}
+// Oznaka "Otvoreno / Zatvoreno" računa se po zagrebačkom vremenu, bez obzira gdje je posjetitelj.
+function crtajOtvoreno(){
+  var d={};
+  new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Zagreb',weekday:'short',hour:'numeric',minute:'numeric',hourCycle:'h23'}).formatToParts(new Date()).forEach(function(p){d[p.type]=p.value;});
+  var dan=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(d.weekday),sati=+d.hour+(+d.minute)/60,r=RADNO[dan],tekst,otvoreno=sati>=r[0]&&sati<r[1];
+  if(otvoreno)tekst=jezik==='en'?'Open today until '+satEN(r[1]):'Otvoreno danas do '+r[1]+':00';
+  else if(sati<r[0])tekst=jezik==='en'?'Closed · opening today at '+satEN(r[0]):'Zatvoreno · otvaramo danas u '+r[0]+':00';
+  else{var s=(dan+1)%7,o=RADNO[s][0];tekst=jezik==='en'?'Closed · opening tomorrow at '+satEN(o):'Zatvoreno · otvaramo sutra u '+o+':00';}
+  document.querySelector('.oznaka').classList.toggle('zatvoreno',!otvoreno);
+  document.querySelector('.oznaka-tekst').textContent=tekst;
+}
 var DOSTAVA=2,kosarica={},jezik='hr',aktivna=KATEGORIJE[0].id,zadnjaNarudzba=null;
 
 function t(s){return jezik==='en'&&EN[s]||s;}
@@ -548,7 +562,7 @@ function postaviJezik(j){
   tekstovi.forEach(function(o){o.n.nodeValue=j==='en'?o.hr.replace(o.s,EN[o.s]):o.hr;});
   atributi.forEach(function(o){o.el.setAttribute(o.a,t(o.s));});
   document.querySelectorAll('.jezik button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.jezik===j);});
-  crtajJelovnik();crtajTermine();crtajPotvrdu();osvjezi();
+  crtajJelovnik();crtajTermine();crtajPotvrdu();crtajOtvoreno();osvjezi();
   try{localStorage.setItem('pd-jezik',j);}catch(e){}
 }
 document.querySelectorAll('.jezik button').forEach(function(b){b.addEventListener('click',function(){postaviJezik(b.dataset.jezik);});});
@@ -556,6 +570,7 @@ document.querySelectorAll('.jezik button').forEach(function(b){b.addEventListene
 var spremljen='hr';
 try{if(localStorage.getItem('pd-jezik')==='en')spremljen='en';}catch(e){}
 postaviJezik(spremljen);
+setInterval(crtajOtvoreno,60000);
 </script>
 </body>
 </html>

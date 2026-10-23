@@ -26,18 +26,23 @@ input:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:2px soli
 .demo b{color:#A78BFA;font-family:'JetBrains Mono',monospace}
 .demo a{color:#C4B5FD;font-weight:700;text-decoration:none}
 
-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:22px;padding-bottom:22px}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:22px;padding-bottom:22px}
 .logo{display:flex;flex-direction:column;line-height:1;font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;text-decoration:none;letter-spacing:.5px}
 .logo small{font-family:'Manrope',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--siva);margin-top:6px}
-nav{display:flex;align-items:center;gap:26px;font-weight:600;font-size:15px}
+nav{display:flex;align-items:center;gap:22px;font-weight:600;font-size:15px}
 nav a{text-decoration:none}
 .nav-link{display:none}
-@media(min-width:760px){.nav-link{display:inline}}
+@media(min-width:860px){.nav-link{display:inline}}
+.jezik{display:flex;gap:2px;padding:3px;border:1px solid var(--rub);border-radius:999px;background:var(--bijela)}
+.jezik button{background:none;border:none;border-radius:999px;padding:6px 10px;min-height:34px;font-size:13px;font-weight:800;color:var(--siva)}
+.jezik button[aria-pressed="true"]{background:var(--tamna);color:var(--bijela)}
 .gumb{display:inline-flex;align-items:center;justify-content:center;background:var(--tamna);color:var(--bijela);border:none;border-radius:999px;padding:13px 24px;font-weight:700;text-decoration:none;min-height:46px}
 .gumb:hover{background:#3A312B}
 .gumb.obrub{background:transparent;color:var(--tamna);border:1px solid var(--tamna)}
 .gumb.obrub:hover{background:var(--tamna);color:var(--bijela)}
-.gumb:disabled{opacity:.4;cursor:not-allowed}
+header .gumb{padding:10px 18px}
+@media(max-width:400px){nav{gap:8px}.logo{font-size:25px}header .gumb{padding:8px 12px}.jezik button{padding:6px 8px}}
+@media(max-width:359px){header .gumb{display:none}}
 
 .hero{padding:40px 0 80px}
 .hero .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:48px}
@@ -60,7 +65,7 @@ nav a{text-decoration:none}
 .naslov-odj{display:flex;flex-direction:column;gap:10px;margin-bottom:36px;max-width:620px}
 .naslov-odj h2{font-size:clamp(40px,5vw,58px)}
 .naslov-odj p{margin:0;color:var(--siva);font-size:17px}
-.cjenik{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px 48px}
+.cjenik{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px 48px}
 .cjenik h3{font-size:28px;margin-bottom:6px;border-bottom:1px solid var(--rub);padding-bottom:10px}
 .usluga-red{display:flex;align-items:baseline;gap:12px;padding:12px 0;border-bottom:1px dashed var(--rub)}
 .usluga-red span:first-child{font-weight:700}
@@ -70,11 +75,13 @@ nav a{text-decoration:none}
 
 .tim{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
 .osoba{background:var(--bijela);border:1px solid var(--rub);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:10px}
-.osoba .lice{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--bijela)}
+.lice{flex:none;width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--bijela)}
 .osoba h3{font-size:26px}
-.osoba p{margin:0;color:var(--siva);font-size:15px}
+.osoba .uloga{font-size:13px;font-weight:800;color:var(--zlatna2);letter-spacing:.5px}
+.osoba p{margin:0;color:var(--siva);font-size:15px;flex:1}
+.osoba .gumb{align-self:flex-start;margin-top:6px;padding:10px 18px;min-height:42px;font-size:14px}
 
-.rezervacija{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;align-items:start}
+.rezervacija{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:24px;align-items:start}
 .kutija{background:var(--pozadina);border:1px solid var(--rub);border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:22px}
 .korak-naslov{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px}
 .korak-naslov i{font-style:normal;width:28px;height:28px;border-radius:50%;background:var(--tamna);color:var(--bijela);display:inline-flex;align-items:center;justify-content:center;font-size:13px}
@@ -84,6 +91,9 @@ nav a{text-decoration:none}
 .izbori button[aria-pressed="true"]{background:var(--tamna);color:var(--bijela);border-color:var(--tamna)}
 .izbori button[aria-pressed="true"] small{color:#D9CBBE}
 .izbori button:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.izbori .uputa{color:var(--siva);font-size:14px}
+.izbor-osoba button{display:flex;align-items:center;gap:12px;padding:8px 16px 8px 8px}
+.izbor-osoba .lice{width:40px;height:40px;font-size:18px}
 .dani{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr))}
 .dani button{text-align:center;padding:8px 6px}
 .dani button b{display:block;font-size:20px;font-family:'Cormorant Garamond',serif}
@@ -92,13 +102,15 @@ nav a{text-decoration:none}
 .polje input{border:1px solid var(--rub);background:var(--bijela);border-radius:12px;padding:12px 14px;font-size:16px;color:var(--tamna)}
 .sazetak{background:var(--tamna);color:var(--bijela);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:16px;position:sticky;top:20px}
 .sazetak h3{font-size:30px}
-.sazetak dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 16px;font-size:15px}
+.sazetak dl{margin:16px 0 0;display:grid;grid-template-columns:auto 1fr;gap:10px 16px;font-size:15px}
 .sazetak dt{color:#BFB2A6}
 .sazetak dd{margin:0;font-weight:700;text-align:right}
 .sazetak .gumb{background:var(--zlatna);color:var(--tamna);width:100%}
 .sazetak .gumb:hover{background:#C29B78}
+.sazetak .gumb.obrub{background:transparent;color:var(--bijela);border-color:var(--bijela);width:auto}
 .napomena{font-size:13px;color:#BFB2A6;margin:0}
 .potvrda{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.potvrda p{margin:0}
 .potvrda .kvaka{width:60px;height:60px;border-radius:50%;background:var(--zlatna);color:var(--tamna);font-size:30px;display:flex;align-items:center;justify-content:center}
 .greska{color:#F3B4A2;font-size:14px;margin:0}
 
@@ -131,6 +143,10 @@ footer a{color:var(--tamna);font-weight:700}
 <a href="#usluge" class="nav-link">Usluge</a>
 <a href="#tim" class="nav-link">Tim</a>
 <a href="#kontakt" class="nav-link">Kontakt</a>
+<div class="jezik" role="group" aria-label="Jezik / Language">
+<button type="button" data-jezik="hr" aria-pressed="true" lang="hr">HR</button>
+<button type="button" data-jezik="en" aria-pressed="false" lang="en">EN</button>
+</div>
 <a href="#rezerviraj" class="gumb">Rezerviraj</a>
 </nav>
 </div>
@@ -179,11 +195,7 @@ footer a{color:var(--tamna);font-weight:700}
 <span class="mali">Tim</span>
 <h2 id="tim-naslov">Upoznajte nas</h2>
 </div>
-<div class="tim">
-<div class="osoba"><span class="lice" style="background:#A9825F">L</span><h3>Lana</h3><p>Vlasnica salona i koloristica. Specijalnost: balayage i prirodne nijanse.</p></div>
-<div class="osoba"><span class="lice" style="background:#6F645C">M</span><h3>Maja</h3><p>Frizerka. Moderna šišanja, svečane frizure i njega kose.</p></div>
-<div class="osoba"><span class="lice" style="background:#3B2A20">T</span><h3>Tea</h3><p>Kozmetičarka. Manikura, pedikura i njega lica.</p></div>
-</div>
+<div class="tim"></div>
 </div>
 </section>
 
@@ -192,15 +204,16 @@ footer a{color:var(--tamna);font-weight:700}
 <div class="naslov-odj">
 <span class="mali">Online rezervacija</span>
 <h2 id="rez-naslov">Rezervirajte termin</h2>
-<p>Odaberite uslugu, dan i vrijeme. Potvrdu dobivate odmah.</p>
+<p>Odaberite uslugu, frizerku, dan i vrijeme. Potvrdu dobivate odmah.</p>
 </div>
 <div class="rezervacija">
 <form class="kutija" id="rez-forma" novalidate>
 <div><div class="korak-naslov"><i>1</i>Usluga</div><div class="izbori izbor-usluga"></div></div>
-<div><div class="korak-naslov"><i>2</i>Dan</div><div class="izbori dani"></div></div>
-<div><div class="korak-naslov"><i>3</i>Vrijeme</div><div class="izbori izbor-vrijeme"><span style="color:var(--siva);font-size:14px">Prvo odaberite dan.</span></div></div>
+<div><div class="korak-naslov"><i>2</i><span class="naziv-osobe"></span></div><div class="izbori izbor-osoba"></div></div>
+<div><div class="korak-naslov"><i>3</i>Dan</div><div class="izbori dani"></div></div>
+<div><div class="korak-naslov"><i>4</i>Vrijeme</div><div class="izbori izbor-vrijeme"></div></div>
 <div>
-<div class="korak-naslov"><i>4</i>Vaši podaci</div>
+<div class="korak-naslov"><i>5</i>Vaši podaci</div>
 <div class="polje"><label for="ime">Ime i prezime</label><input id="ime" autocomplete="name" placeholder="Ivana Horvat"></div>
 <div class="polje"><label for="mob">Mobitel</label><input id="mob" type="tel" autocomplete="tel" placeholder="091 234 5678"></div>
 </div>
@@ -208,8 +221,9 @@ footer a{color:var(--tamna);font-weight:700}
 <aside class="sazetak" aria-live="polite">
 <div class="sazetak-sadrzaj">
 <h3>Vaš termin</h3>
-<dl style="margin-top:16px">
+<dl>
 <dt>Usluga</dt><dd class="s-usluga">–</dd>
+<dt class="naziv-osobe"></dt><dd class="s-osoba">–</dd>
 <dt>Trajanje</dt><dd class="s-trajanje">–</dd>
 <dt>Dan</dt><dd class="s-dan">–</dd>
 <dt>Vrijeme</dt><dd class="s-vrijeme">–</dd>
@@ -221,8 +235,8 @@ footer a{color:var(--tamna);font-weight:700}
 <div class="potvrda" hidden>
 <div class="kvaka" aria-hidden="true">✓</div>
 <h3>Vidimo se!</h3>
-<p class="potvrda-tekst" style="margin:0"></p>
-<button type="button" class="gumb obrub nova" style="color:var(--bijela);border-color:var(--bijela)">Nova rezervacija</button>
+<p class="potvrda-tekst"></p>
+<button type="button" class="gumb obrub nova">Nova rezervacija</button>
 </div>
 <p class="napomena">Ovo je primjer: rezervacija se nigdje ne šalje. Na pravoj stranici salon dobiva obavijest, a klijent podsjetnik dan ranije.</p>
 </aside>
@@ -262,92 +276,238 @@ footer a{color:var(--tamna);font-weight:700}
 </footer>
 
 <script>
-// Usluge izmišljenog salona. Na pravoj stranici ovdje su usluge, trajanja i cijene klijenta.
+// Prijevod fiksnih tekstova na stranici. Usluge i tim imaju svoj prijevod u USLUGE i TIM.
+var EN={
+'Studio Lana: primjer stranice za rezervacije':'Studio Lana: online booking example',
+'Ovo je':'This is an',
+'primjer stranice':'example website',
+'za izmišljeni salon. Rezervacije se ne šalju.':'for a fictional salon. Bookings are not sent.',
+'← Natrag na PaRa Digital':'← Back to PaRa Digital',
+'Glavna navigacija':'Main navigation',
+'Usluge':'Services',
+'Tim':'Team',
+'Kontakt':'Contact',
+'Rezerviraj':'Book',
+'Frizerski i kozmetički salon · Zagreb':'Hair and beauty salon · Zagreb',
+'Vrijeme':'Time',
+'samo':'just',
+'za vas.':'for you.',
+'Šišanje, bojanje i njega u mirnom prostoru, s ljudima koji vas slušaju. Termin rezervirate online u minuti, bez čekanja na telefon.':'Haircuts, color and care in a calm space, with people who listen to you. Book your appointment online in a minute, no waiting on the phone.',
+'Rezerviraj termin':'Book an appointment',
+'Pogledaj cjenik':'See prices',
+'4,9 ★':'4.9 ★',
+'186 recenzija na Googleu':'186 reviews on Google',
+'Cjenik':'Prices',
+'Naše usluge':'Our services',
+'Sve cijene uključuju pranje, njegu i styling. Za dulju kosu cijena može biti nešto viša.':'All prices include washing, conditioning and styling. Prices may be slightly higher for longer hair.',
+'Upoznajte nas':'Meet the team',
+'Online rezervacija':'Online booking',
+'Rezervirajte termin':'Book an appointment',
+'Odaberite uslugu, frizerku, dan i vrijeme. Potvrdu dobivate odmah.':'Choose a service, stylist, day and time. You get confirmation right away.',
+'Usluga':'Service',
+'Dan':'Day',
+'Vaši podaci':'Your details',
+'Ime i prezime':'Full name',
+'Ivana Horvat':'Jane Smith',
+'Mobitel':'Mobile',
+'Vaš termin':'Your appointment',
+'Trajanje':'Duration',
+'Cijena':'Price',
+'Potvrdi rezervaciju':'Confirm booking',
+'Vidimo se!':'See you soon!',
+'Nova rezervacija':'New booking',
+'Ovo je primjer: rezervacija se nigdje ne šalje. Na pravoj stranici salon dobiva obavijest, a klijent podsjetnik dan ranije.':'This is an example: the booking is not sent anywhere. On a real website the salon gets a notification and the client gets a reminder the day before.',
+'Gdje smo':'Where to find us',
+'Radno vrijeme':'Opening hours',
+'Ponedjeljak do petak':'Monday to Friday',
+'9:00 do 20:00':'9 am to 8 pm',
+'Subota':'Saturday',
+'8:00 do 14:00':'8 am to 2 pm',
+'Nedjelja':'Sunday',
+'zatvoreno':'closed',
+'Adresa':'Address',
+'Ulica primjera 8, Zagreb':'8 Example Street, Zagreb',
+'Telefon':'Phone',
+'01 234 5678':'+385 1 234 5678',
+'Parking':'Parking',
+'Besplatno u dvorištu':'Free in the courtyard',
+'© 2026 Studio Lana (izmišljeni salon)':'© 2026 Studio Lana (fictional salon)',
+'Izradio':'Made by',
+// tekstovi koje slaže skripta
+'Prvo odaberite dan.':'Choose a day first.',
+'zauzeto':'booked',
+'Još trebate upisati ili odabrati:':'Please still enter or choose:',
+'uslugu':'service',
+'dan':'day',
+'vrijeme':'time',
+'ime':'name',
+'mobitel':'mobile number'
+};
+
+// Usluge i tim izmišljenog salona. Na pravoj stranici ovdje su usluge, cijene i djelatnici klijenta.
+var KATEGORIJE={kosa:{hr:'Kosa',en:'Hair'},boja:{hr:'Boja',en:'Color'},njega:{hr:'Njega',en:'Beauty'}};
 var USLUGE=[
-{kat:'Kosa',ime:'Žensko šišanje',min:60,cijena:30},
-{kat:'Kosa',ime:'Muško šišanje',min:30,cijena:18},
-{kat:'Kosa',ime:'Feniranje',min:30,cijena:20},
-{kat:'Kosa',ime:'Svečana frizura',min:60,cijena:45},
-{kat:'Boja',ime:'Bojanje izrasta',min:90,cijena:45},
-{kat:'Boja',ime:'Pramenovi',min:120,cijena:70},
-{kat:'Boja',ime:'Balayage',min:180,cijena:110},
-{kat:'Njega',ime:'Manikura',min:45,cijena:25},
-{kat:'Njega',ime:'Gel lak',min:60,cijena:30},
-{kat:'Njega',ime:'Pedikura',min:60,cijena:35},
-{kat:'Njega',ime:'Njega lica',min:60,cijena:50}
+{kat:'kosa',hr:'Žensko šišanje',en:'Women\'s haircut',min:60,cijena:30},
+{kat:'kosa',hr:'Muško šišanje',en:'Men\'s haircut',min:30,cijena:18},
+{kat:'kosa',hr:'Feniranje',en:'Blow-dry',min:30,cijena:20},
+{kat:'kosa',hr:'Svečana frizura',en:'Occasion hairstyle',min:60,cijena:45},
+{kat:'boja',hr:'Bojanje izrasta',en:'Root color',min:90,cijena:45},
+{kat:'boja',hr:'Pramenovi',en:'Highlights',min:120,cijena:70},
+{kat:'boja',hr:'Balayage',en:'Balayage',min:180,cijena:110},
+{kat:'njega',hr:'Manikura',en:'Manicure',min:45,cijena:25},
+{kat:'njega',hr:'Gel lak',en:'Gel polish',min:60,cijena:30},
+{kat:'njega',hr:'Pedikura',en:'Pedicure',min:60,cijena:35},
+{kat:'njega',hr:'Njega lica',en:'Facial',min:60,cijena:50}
 ];
-var DANI=['Ned','Pon','Uto','Sri','Čet','Pet','Sub'],DANI_PUNO=['nedjelja','ponedjeljak','utorak','srijeda','četvrtak','petak','subota'];
-var odabir={usluga:null,dan:null,vrijeme:null};
-var greska=document.querySelector('.greska');
+// kod: ime u genitivu ("kod Lane"), kat: koje vrste usluga radi.
+var TIM=[
+{ime:'Lana',kod:'Lane',boja:'#A9825F',kat:['kosa','boja'],uloga:{hr:'Vlasnica i koloristica',en:'Owner and colorist'},opis:{hr:'Specijalnost: balayage i prirodne nijanse.',en:'Specialty: balayage and natural shades.'}},
+{ime:'Maja',kod:'Maje',boja:'#6F645C',kat:['kosa','boja'],uloga:{hr:'Frizerka',en:'Hairstylist'},opis:{hr:'Moderna šišanja, svečane frizure i njega kose.',en:'Modern cuts, occasion hairstyles and hair care.'}},
+{ime:'Tea',kod:'Tee',boja:'#3B2A20',kat:['njega'],uloga:{hr:'Kozmetičarka',en:'Beautician'},opis:{hr:'Manikura, pedikura i njega lica.',en:'Manicure, pedicure and facials.'}}
+];
+var DANI={hr:['Ned','Pon','Uto','Sri','Čet','Pet','Sub'],en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat']};
+var DANI_PUNO={hr:['nedjelja','ponedjeljak','utorak','srijeda','četvrtak','petak','subota'],en:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']};
+var MJESECI_EN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var jezik='hr',odabir={usluga:null,osoba:null,dan:null,vrijeme:null},rezervirano=null;
 
-function eur(x){return x+' €';}
+function t(s){return jezik==='en'&&EN[s]||s;}
+function eur(x){return jezik==='en'?'€'+x:x+' €';}
 function trajanje(m){var h=Math.floor(m/60),r=m%60;return (h?h+' h':'')+(h&&r?' ':'')+(r?r+' min':'');}
-function datum(d){return DANI_PUNO[d.getDay()]+', '+d.getDate()+'. '+(d.getMonth()+1)+'.';}
+function datum(d){return jezik==='en'?DANI_PUNO.en[d.getDay()]+', '+d.getDate()+' '+MJESECI_EN[d.getMonth()]:DANI_PUNO.hr[d.getDay()]+', '+d.getDate()+'. '+(d.getMonth()+1)+'.';}
+function njega(){
+  if(odabir.usluga!==null)return USLUGE[odabir.usluga].kat==='njega';
+  return odabir.osoba!==null&&TIM[odabir.osoba].kat.indexOf('njega')>=0;
+}
+function nazivOsobe(){return njega()?(jezik==='en'?'Beautician':'Kozmetičarka'):(jezik==='en'?'Stylist':'Frizerka');}
+function mozeRaditi(o){return odabir.usluga===null||TIM[o].kat.indexOf(USLUGE[odabir.usluga].kat)>=0;}
 
+// Fiksni tekstovi se pamte na hrvatskom prije prvog crtanja, da se uvijek mogu vratiti.
+var tekstovi=[],atributi=[],naslov=document.title;
 (function(){
-  var kat={};USLUGE.forEach(function(u){(kat[u.kat]=kat[u.kat]||[]).push(u);});
-  document.querySelector('.cjenik').innerHTML=Object.keys(kat).map(function(k){
-    return '<div><h3>'+k+'</h3>'+kat[k].map(function(u){return '<div class="usluga-red"><span>'+u.ime+'<small>'+trajanje(u.min)+'</small></span><span class="tocke"></span><b>'+eur(u.cijena)+'</b></div>';}).join('')+'</div>';
-  }).join('');
+  var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),n;
+  while((n=w.nextNode())){if(n.parentElement.closest('script'))continue;var s=n.nodeValue.trim();if(EN[s])tekstovi.push({n:n,hr:n.nodeValue,s:s});}
+  document.querySelectorAll('[placeholder],[aria-label]').forEach(function(el){
+    ['placeholder','aria-label'].forEach(function(a){var s=el.getAttribute(a);if(s&&EN[s])atributi.push({el:el,a:a,s:s});});
+  });
 })();
-
-var uslugeEl=document.querySelector('.izbor-usluga'),daniEl=document.querySelector('.dani'),vrijemeEl=document.querySelector('.izbor-vrijeme');
-uslugeEl.innerHTML=USLUGE.map(function(u,i){return '<button type="button" data-i="'+i+'" aria-pressed="false">'+u.ime+'<small>'+trajanje(u.min)+' · '+eur(u.cijena)+'</small></button>';}).join('');
 
 var dani=[];
 (function(){var d=new Date();d.setHours(0,0,0,0);while(dani.length<12){d.setDate(d.getDate()+1);if(d.getDay()!==0)dani.push(new Date(d));}})();
-daniEl.innerHTML=dani.map(function(d,i){return '<button type="button" data-i="'+i+'" aria-pressed="false" aria-label="'+datum(d)+'">'+DANI[d.getDay()]+'<b>'+d.getDate()+'</b></button>';}).join('');
 
-// Neki termini su "zauzeti" da primjer izgleda stvarno; isti dan uvijek ima iste zauzete termine.
-function termini(d){
-  var kraj=d.getDay()===6?14:20,lista=[];
-  for(var h=d.getDay()===6?8:9;h<kraj;h++)for(var m=0;m<60;m+=30){
-    var zauzet=((d.getDate()*7+h*3+m)%5)===0;
-    lista.push({t:h+':'+(m?'30':'00'),zauzet:zauzet});
+// Neki termini su "zauzeti" da primjer izgleda stvarno; svaka djelatnica ima svoje zauzete termine.
+function termini(d,o){
+  var lista=[],pocetak=d.getDay()===6?8:9,kraj=d.getDay()===6?14:20;
+  for(var h=pocetak;h<kraj;h++)for(var m=0;m<60;m+=30){
+    lista.push({t:h+':'+(m?'30':'00'),zauzet:((d.getDate()*7+h*3+m+o*11)%4)===0});
   }
   return lista;
 }
-function crtajVrijeme(){
-  if(odabir.dan===null)return;
-  vrijemeEl.innerHTML=termini(dani[odabir.dan]).map(function(o){
-    return '<button type="button" data-t="'+o.t+'" aria-pressed="'+(odabir.vrijeme===o.t)+'"'+(o.zauzet?' disabled aria-label="'+o.t+', zauzeto"':'')+'>'+o.t+'</button>';
+
+var cjenikEl=document.querySelector('.cjenik'),timEl=document.querySelector('.tim'),uslugeEl=document.querySelector('.izbor-usluga'),osobeEl=document.querySelector('.izbor-osoba'),daniEl=document.querySelector('.dani'),vrijemeEl=document.querySelector('.izbor-vrijeme');
+
+function crtajCjenik(){
+  cjenikEl.innerHTML=Object.keys(KATEGORIJE).map(function(k){
+    return '<div><h3>'+KATEGORIJE[k][jezik]+'</h3>'+USLUGE.filter(function(u){return u.kat===k;}).map(function(u){
+      return '<div class="usluga-red"><span>'+u[jezik]+'<small>'+trajanje(u.min)+'</small></span><span class="tocke"></span><b>'+eur(u.cijena)+'</b></div>';
+    }).join('')+'</div>';
   }).join('');
 }
-function oznaci(el,attr,val){el.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset[attr]===String(val));});}
-function sazetak(){
-  greska.hidden=true;
+function crtajTim(){
+  timEl.innerHTML=TIM.map(function(o,i){
+    return '<div class="osoba"><span class="lice" style="background:'+o.boja+'">'+o.ime[0]+'</span><h3>'+o.ime+'</h3><span class="uloga">'+o.uloga[jezik]+'</span><p>'+o.opis[jezik]+'</p>'+
+      '<a href="#rezerviraj" class="gumb obrub" data-osoba="'+i+'">'+(jezik==='en'?'Book with '+o.ime:'Rezerviraj kod '+o.kod)+'</a></div>';
+  }).join('');
+}
+function crtajRezervaciju(){
+  uslugeEl.innerHTML=USLUGE.map(function(u,i){
+    return '<button type="button" data-i="'+i+'" aria-pressed="'+(odabir.usluga===i)+'">'+u[jezik]+'<small>'+trajanje(u.min)+' · '+eur(u.cijena)+'</small></button>';
+  }).join('');
+  osobeEl.innerHTML=TIM.map(function(o,i){
+    if(!mozeRaditi(i))return '';
+    return '<button type="button" data-i="'+i+'" aria-pressed="'+(odabir.osoba===i)+'"><span class="lice" style="background:'+o.boja+'" aria-hidden="true">'+o.ime[0]+'</span><span>'+o.ime+'<small>'+o.uloga[jezik]+'</small></span></button>';
+  }).join('');
+  daniEl.innerHTML=dani.map(function(d,i){
+    return '<button type="button" data-i="'+i+'" aria-pressed="'+(odabir.dan===i)+'" aria-label="'+datum(d)+'">'+DANI[jezik][d.getDay()]+'<b>'+d.getDate()+'</b></button>';
+  }).join('');
+  if(odabir.dan===null||odabir.osoba===null){
+    vrijemeEl.innerHTML='<span class="uputa">'+(odabir.osoba===null?(jezik==='en'?'Choose a '+nazivOsobe().toLowerCase()+' first.':'Prvo odaberite '+(njega()?'kozmetičarku':'frizerku')+'.'):t('Prvo odaberite dan.'))+'</span>';
+  }else{
+    vrijemeEl.innerHTML=termini(dani[odabir.dan],odabir.osoba).map(function(o){
+      return '<button type="button" data-t="'+o.t+'" aria-pressed="'+(odabir.vrijeme===o.t)+'"'+(o.zauzet?' disabled aria-label="'+o.t+', '+t('zauzeto')+'"':'')+'>'+o.t+'</button>';
+    }).join('');
+  }
+  document.querySelectorAll('.naziv-osobe').forEach(function(el){el.textContent=nazivOsobe();});
   var u=odabir.usluga!==null?USLUGE[odabir.usluga]:null;
-  document.querySelector('.s-usluga').textContent=u?u.ime:'–';
+  document.querySelector('.s-usluga').textContent=u?u[jezik]:'–';
+  document.querySelector('.s-osoba').textContent=odabir.osoba!==null?TIM[odabir.osoba].ime:'–';
   document.querySelector('.s-trajanje').textContent=u?trajanje(u.min):'–';
   document.querySelector('.s-cijena').textContent=u?eur(u.cijena):'–';
   document.querySelector('.s-dan').textContent=odabir.dan!==null?datum(dani[odabir.dan]):'–';
   document.querySelector('.s-vrijeme').textContent=odabir.vrijeme||'–';
 }
-uslugeEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;odabir.usluga=+b.dataset.i;oznaci(uslugeEl,'i',odabir.usluga);sazetak();});
-daniEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;odabir.dan=+b.dataset.i;odabir.vrijeme=null;oznaci(daniEl,'i',odabir.dan);crtajVrijeme();sazetak();});
-vrijemeEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;odabir.vrijeme=b.dataset.t;oznaci(vrijemeEl,'t',odabir.vrijeme);sazetak();});
 
-var forma=document.getElementById('rez-forma'),potvrda=document.querySelector('.potvrda'),potvrdi=document.querySelector('.potvrdi');
+uslugeEl.addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  odabir.usluga=+b.dataset.i;
+  if(odabir.osoba!==null&&!mozeRaditi(odabir.osoba)){odabir.osoba=null;odabir.vrijeme=null;}
+  var moguce=TIM.map(function(o,i){return i;}).filter(mozeRaditi);
+  if(moguce.length===1&&odabir.osoba!==moguce[0]){odabir.osoba=moguce[0];odabir.vrijeme=null;}
+  promjena();
+});
+osobeEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;odabir.osoba=+b.dataset.i;odabir.vrijeme=null;promjena();});
+daniEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;odabir.dan=+b.dataset.i;odabir.vrijeme=null;promjena();});
+vrijemeEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;odabir.vrijeme=b.dataset.t;promjena();});
+timEl.addEventListener('click',function(e){
+  var a=e.target.closest('[data-osoba]');if(!a)return;
+  var i=+a.dataset.osoba;
+  if(odabir.usluga!==null&&TIM[i].kat.indexOf(USLUGE[odabir.usluga].kat)<0)odabir.usluga=null;
+  odabir.osoba=i;odabir.vrijeme=null;promjena();
+});
+
+var forma=document.getElementById('rez-forma'),greska=document.querySelector('.greska'),potvrda=document.querySelector('.potvrda'),potvrdi=document.querySelector('.potvrdi'),sadrzaj=document.querySelector('.sazetak-sadrzaj');
+function promjena(){greska.hidden=true;crtajRezervaciju();}
+function crtajPotvrdu(){
+  if(!rezervirano)return;
+  var r=rezervirano,u=USLUGE[r.usluga],o=TIM[r.osoba],d=datum(dani[r.dan]);
+  document.querySelector('.potvrda-tekst').textContent=jezik==='en'
+    ?'Thank you, '+r.ime+'! Your appointment is booked: '+u.en+' with '+o.ime+', '+d+' at '+r.vrijeme+'. You will get a reminder at '+r.mob+' the day before.'
+    :'Hvala, '+r.ime+'! Vaš termin je rezerviran: '+u.hr+' kod '+o.kod+', '+d+' u '+r.vrijeme+'. Dan ranije stiže vam podsjetnik na '+r.mob+'.';
+}
 forma.addEventListener('submit',function(e){
   e.preventDefault();
   var ime=document.getElementById('ime').value.trim(),mob=document.getElementById('mob').value.trim(),fali=[];
-  if(odabir.usluga===null)fali.push('uslugu');
-  if(odabir.dan===null)fali.push('dan');
-  if(!odabir.vrijeme)fali.push('vrijeme');
-  if(!ime)fali.push('ime');
-  if(!mob)fali.push('mobitel');
-  if(fali.length){greska.textContent='Još trebate upisati ili odabrati: '+fali.join(', ')+'.';greska.hidden=false;return;}
-  greska.hidden=true;
-  var u=USLUGE[odabir.usluga];
-  document.querySelector('.potvrda-tekst').textContent='Hvala, '+ime+'! Vaš termin je rezerviran: '+u.ime+', '+datum(dani[odabir.dan])+' u '+odabir.vrijeme+'. Dan ranije stiže vam podsjetnik na '+mob+'.';
-  document.querySelector('.sazetak-sadrzaj').hidden=true;potvrdi.hidden=true;potvrda.hidden=false;
+  if(odabir.usluga===null)fali.push(t('uslugu'));
+  if(odabir.osoba===null)fali.push(jezik==='en'?nazivOsobe().toLowerCase():(njega()?'kozmetičarku':'frizerku'));
+  if(odabir.dan===null)fali.push(t('dan'));
+  if(!odabir.vrijeme)fali.push(t('vrijeme'));
+  if(!ime)fali.push(t('ime'));
+  if(!mob)fali.push(t('mobitel'));
+  if(fali.length){greska.textContent=t('Još trebate upisati ili odabrati:')+' '+fali.join(', ')+'.';greska.hidden=false;return;}
+  rezervirano={usluga:odabir.usluga,osoba:odabir.osoba,dan:odabir.dan,vrijeme:odabir.vrijeme,ime:ime,mob:mob};
+  crtajPotvrdu();
+  sadrzaj.hidden=true;potvrdi.hidden=true;potvrda.hidden=false;
 });
 document.querySelector('.nova').addEventListener('click',function(){
-  odabir={usluga:null,dan:null,vrijeme:null};forma.reset();
-  oznaci(uslugeEl,'i','');oznaci(daniEl,'i','');
-  vrijemeEl.innerHTML='<span style="color:var(--siva);font-size:14px">Prvo odaberite dan.</span>';
-  sazetak();document.querySelector('.sazetak-sadrzaj').hidden=false;potvrdi.hidden=false;potvrda.hidden=true;
+  odabir={usluga:null,osoba:null,dan:null,vrijeme:null};rezervirano=null;forma.reset();
+  sadrzaj.hidden=false;potvrdi.hidden=false;potvrda.hidden=true;promjena();
 });
+
+function postaviJezik(j){
+  jezik=j;
+  document.documentElement.lang=j;
+  document.title=t(naslov);
+  tekstovi.forEach(function(o){o.n.nodeValue=j==='en'?o.hr.replace(o.s,EN[o.s]):o.hr;});
+  atributi.forEach(function(o){o.el.setAttribute(o.a,t(o.s));});
+  document.querySelectorAll('.jezik button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.jezik===j);});
+  if(!greska.hidden)greska.hidden=true;
+  crtajCjenik();crtajTim();crtajRezervaciju();crtajPotvrdu();
+  try{localStorage.setItem('pd-jezik',j);}catch(e){}
+}
+document.querySelectorAll('.jezik button').forEach(function(b){b.addEventListener('click',function(){postaviJezik(b.dataset.jezik);});});
+
+var spremljen='hr';
+try{if(localStorage.getItem('pd-jezik')==='en')spremljen='en';}catch(e){}
+postaviJezik(spremljen);
 </script>
 </body>
 </html>
